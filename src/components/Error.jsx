@@ -2,6 +2,6 @@
 
 export const Error = ({ error }) => {
     return (
-        <div>{error}</div>
+        <div className="text-danger m-3 shadow-sm p-3 rounded-3">{error}</div>
     )
 }

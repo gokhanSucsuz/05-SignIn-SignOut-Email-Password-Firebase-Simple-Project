@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Error } from "../components/Error";
 
@@ -39,6 +39,7 @@ export const Login = () => {
                         </div>
                     </div>
                     <button type="submit" className="btn btn-info text-white" onClick={handleSubmit}>Sign in</button>
+                    <span className="ms-3">Do not you have any account? <Link to="/register">Register</Link></span>
                     {err && <Error error={err} />}
                 </form>
 

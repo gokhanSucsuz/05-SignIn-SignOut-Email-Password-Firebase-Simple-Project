@@ -3,8 +3,9 @@ import { useState } from "react";
 import { FcAddImage } from "react-icons/fc"
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Error } from "../components/Error";
 
 export const Register = () => {
     const [email, setEmail] = useState("")
@@ -12,6 +13,7 @@ export const Register = () => {
     const [img, setImg] = useState(null)
     const [username, setUsername] = useState("")
     const navigate = useNavigate()
+    const [err, setErr] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,7 +43,7 @@ export const Register = () => {
                 navigate("/");
             });
         } catch (err) {
-            console.log(err);
+            setErr(err.message);
         }
     }
 
@@ -83,6 +85,8 @@ export const Register = () => {
                         </div>
                     </div>
                     <button type="submit" className="btn btn-info text-white w-50" onClick={handleSubmit}>Register</button>
+                    <span className="ms-3">Do you have an account? <Link to="/login">Login</Link></span>
+                    {err && <Error error={err} />}
                 </form>
             </div>
         </div>
